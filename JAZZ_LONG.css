@@ -1,0 +1,323 @@
+
+.section{/*class used to identify different sections*/
+    display:none;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*HOME PAGE*/
+.player{ /*Players from the DB*/
+    width: 95%;
+    height: 3vh;
+    background-color: gold;
+    display : block;
+    text-align : center;
+    margin : 0.5vh;
+    border-radius: 1vh;
+    box-shadow: 0 0 1.5em rgba(44, 38, 38, 0.5) inset, 0 0.03em rgba(90, 82, 82, 0.2) inset, 0 0.15em 0.4em rgba(39, 37, 37, 0.5);
+    font-size: 2vh;
+    font-family: 'Times New Roman', Times, serif;
+}
+#container_names{
+    width : 18vw;
+    height: 20vh;
+    position : fixed;
+    display: block;
+    top : 100vh;
+    left : 90vw;
+    transform: translate(-50vw,-50vh);
+}
+
+#internal_container_names{
+    height : 18vh;
+    width: 18vw;
+    overflow-y : scroll;
+    position: relative;
+    display: block;
+    
+    
+}
+#name_input{/*Input section*/
+    width: 95%;
+    height: 4vh;
+    margin: 0.5vh;
+    position: relative;
+    display: block;
+    font-size: 2vh;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#title1{/*Image of the title*/
+    background-image: url("title.png");
+    position : fixed;
+    left : 78vw;
+    bottom: 0vh;
+    transform: translate(-50vw,-50vh);
+    width: 40vw;
+    height: 50vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
+#level{/*level tag*/
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    position: fixed;
+    font-size: 3vh;
+    width: 20vw;
+    height: 3vh;
+    left: -4vw;
+    top: 2vh;
+}
+#level_button{
+    width: 5vw;
+    height: 3vh;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    position: fixed;
+    font-size: 2vh;
+    vertical-align: top;
+}
+
+#execution{
+    width: 100vw;
+
+}
+.invisible-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+#title{
+    background-image: url("final_score_1.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,0%);
+    width: 450px;
+    height: 270px;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+    
+}
+
+#image{
+    background-image: url("jazz\ -\ Copia.png");
+    position : absolute;
+    /*left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,0%);*/
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
+.score_row{
+    width: 200px;
+    margin: 5px;
+    background-color:rgb(255, 202, 24);
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    position: relative;
+    left: 40%;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+
+}
+.first{
+    width: 300px;
+    height: 50px;
+    margin: 5px;
+    background-color: gold;
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    border-radius: 5px;
+    left: 35%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+
+}
+
+.second{
+    width: 300px;
+    height: 50px;
+    margin: 5px;
+    background-color: silver;
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    border-radius: 5px;
+    left:50%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+
+}
+
+.third{
+    width: 300px;
+    height: 50px;
+    margin: 5px;
+    background-color:#a84c32;
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    border-radius: 5px;
+    left:20%;
+    position: relative;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+
+}
+#high_score{
+    position : absolute;
+    left : 50%;
+    top : 45%;
+    transform: translate(-50%,0%);
+    width: 900px;
+}
+
+/*partitura scorrevole*/
+#exec_bar_container{
+    width: 100%;
+    height: 70%;   
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+}
+.exec_bar{
+    width: 25%;
+    height: 40%;
+    position: absolute;
+    margin-bottom: 6px;
+    margin-right: 4px;
+    right: 0%;
+    /*border: 1px solid red;*/
+    display: inline-block;
+    opacity:0;
+}
+.exec_beat{
+    height: 100%;
+    text-align: center;
+    border: 1px solid black;
+    background:  rgb(55, 248, 16);
+    display: inline-block;
+    font-size: small;
+}
+
+#intro{
+    background-image: url("jazz\ -\ Copia.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,60%);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+#statistic{
+    background-image: url("jazz\ -\ Copia.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,60%);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
+#final{
+    background-image: url("jazz\ -\ Copia.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,60%);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
+/*table score*/
+table {
+    border-collapse: collapse;
+    width: 900px;
+    position: absolute;
+    transform: translate(-50%,25%);
+    left : 50%;
+    bottom: 50%;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+    border-radius: 5px;
+}
+th, td {
+    text-align: center;
+    padding: 8px;
+    font-family: 'Times New Roman', Times, serif;
+   
+}
+
+th {
+    background-color: #ffca18;
+    color: black;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+/*slider general*/
+
+.slider {
+    -webkit-appearance: none;
+    width: 136.6px;
+    height: 3.175px;
+    border-radius: 5px;
+    background: black;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 27.32px;
+    height: 12.7px;
+    background-image: url("fader.png");
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+  }
+
+#drumgain_comp, #chordgain_comp,#pianogain_comp{
+    display: inline-block;
+    position: relative;
+}
+#demo1{
+    font-size: 3vh;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 10vw; 
+}
+#demo2{
+    font-size: 3vh;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 5vw; 
+}
+#demo3{
+    font-size: 3vh;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 6vw; 
+}

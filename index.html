@@ -1,7 +1,265 @@
-<!DOCTYPE html>
-<html>
+<link rel="stylesheet" href="Harmony.css"></link>
+<link rel="stylesheet" href="DM_v3.css"></link>
+<link rel="stylesheet" href="playPage.css"></link>
+<link rel="stylesheet" href="JAZZ_LONG.css"></link>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyBA_K_kT4MbJOxi3nhSUZoRWEzYnTjuzGY",
+          authDomain: "jazz-long-93f21.firebaseapp.com",
+          databaseURL: "https://jazz-long-93f21.firebaseio.com",
+          projectId: "jazz-long-93f21",
+          storageBucket: "jazz-long-93f21.appspot.com",
+          messagingSenderId: "1045437265754",
+          appId: "1:1045437265754:web:900f0786f66e1eebd86563",
+          measurementId: "G-WKCCERR32B"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 </body>
-</html>
+
+
+<div class = "section" id = "intro">
+    <div id="title1"></div>
+    <div id="container_names">
+        <input id="name_input" type="text" value="Insert your name" onclick="empty_input()"></input>
+        <div id="internal_container_names" class="invisible-scrollbar"></div>
+    </div>
+    <div id="level">Difficulty level: <button id="level_button" onclick = 'difficulty_selection()'>EASY</button></div>
+</div>
+
+<div class = "section" id = "composition">
+    <div id="Composition_section">
+        <div class="slidecontainer">
+            <div id="demo1">Drum Machine:</div>
+            <input type="range" min="0" max="100" class="slider" id="drumgain_comp">
+            <div id="demo2">Chords:</div> 
+            <input type="range" min="0" max="100" class="slider" id="chordgain_comp">
+            <div id="demo3">Keyboard:</div>
+            <input type="range" min="0" max="100" class="slider" id="pianogain_comp">
+        </div>
+        
+    <div id="DrumMachine">
+        <div id = "selection">
+            <div class = "column" id='col1'>
+                <button class="sel sel1" onclick = "straight()">STRAIGHT</button>
+                <button class="sel sel1" onclick = "shuffle()" >SHUFFLE </button>
+            </div>
+            <div class = "column" id='col2'>
+                <button class="sel sel2">3/4</button>
+                <button class="sel sel2">4/4</button>
+                <button class="sel sel2">5/4</button>
+            </div>
+            <div class = "column" id='col3'>
+                <button class="sel sel3"></button>
+                <button class="sel sel3"></button>
+                <button class="sel sel3"></button>
+                <button class="sel sel3"></button>
+                <button class="sel sel3"></button>
+                <button class="sel sel3"></button>
+            </div>
+            <div class = "column" id='col4'>
+                <button class="sel sel4" id="play_button" onclick = 'DM_play()'>PLAY</button>
+            </div>
+            <div id="row">
+                Tempo = <input type="text" id="tempo_selector"></input> BPM
+            </div>
+        </div>
+        <canvas id="RoundVisualizer" height="200vh" width="200vw" style = "left : 30vw"></canvas>
+        <div id="StrokeSelector"></div>
+        <img src="drum.png" width="25%" style="position: fixed; vertical-align:middle;margin:9vh 32vw"></img>
+
+    </div>
+    
+        <!-- SEZIONE A DESTRA  -->
+        <div id="chords_selector">
+            <div class="Selector_title">CHORD SELECTOR</div>
+            <div id="settima_button"><button  type="button" value="">7th</button></div>
+            <div id="nona_button"><button  type="button" value="">9th</button></div>
+            <div id="empty_button"><button  type="button" value="">empty beat</button></div>
+            <div id="Tonalità">
+                <div class= "piano_button white_button selected_key"></div>
+                <div class= "piano_button black_button"></div>
+                <div class= "piano_button white_button"></div>
+                <div class= "piano_button black_button"></div>
+                <div class= "piano_button white_button"></div>
+                <div class= "piano_button white_button"></div>
+                <div class= "piano_button black_button"></div>
+                <div class= "piano_button white_button"></div>
+                <div class= "piano_button black_button"></div>
+                <div class= "piano_button white_button"></div>
+                <div class= "piano_button black_button"></div>
+                <div class= "piano_button white_button"></div>
+            </div>
+            <div class="major_chords">
+                <div class="chord"></div>
+                <div class="chord tonal_chord"></div>
+                <div class="chord"></div>
+            </div>
+            <div class="minor_chords">
+                <div class="chord"></div>
+                <div class="chord"></div>
+                <div class="chord"></div>
+            </div>
+            <div class="chord dim_chord "></div>
+            <div id="preset_list">
+                <div id="preset_title">PRESETS</div>
+                <div class="preset_el">I-VI-II-V</div>
+                <div class="preset_el">V of V</div>
+                <div class="preset_el">II-V chain</div>
+                <div class="preset_el">III-VI-II-V</div>
+                <div class="preset_el">I-II-III-IV</div>
+            </div>
+        </div>
+    
+        <!-- SEZIONE IN BASSO  -->
+        <div id="chords_sequence">
+            <div class="Selector_title">CHORDS SEQUENCE</div>
+            <div id="add_bar_button"><button  type="button" value="">add_bar</button></div>
+            <div id="remove_bar_button"><button  type="button" value="">remove_bar</button></div>
+            <div id="bar_container"></div>
+        </div>
+   
+    <button onclick = "changeSection(2); DM_stop(); create_all_bars();">NEXT</button>
+    </div>
+    
+</div>
+<div class = "section" id = "execution">
+    <button onclick = "changeSection(1); DM_stop(); render_empty_scale();">PREVIOUS</button>
+    <button onclick = "changeSection(3); DM_stop(); render_empty_scale();refresh_score();render_statistics();set_db();">END</button>
+    <div id = "Execution_Section">
+
+        <body>
+            <button class="play", onclick="play_bouncing(); resume(); DM_play()">PLAY</button>
+            <button class="stop", onclick="stop_bouncing(); DM_stop(); render_empty_scale()">STOP</button>
+            <div class="key_box"></div>
+            <div class="mode_box"></div>
+            <div class="slidecontainer" id="slider_exec">
+                <div class="demo">Drum Machine:</div>
+                <input type="range" min="0" max="100" class="slider" id="drumgain_exec">
+                <div class="demo">Chords:</div>
+                <input type="range" min="0" max="100" class="slider" id="chordgain_exec">
+                <div class="demo">Keyboard:</div>
+                <input type="range" min="0" max="100" class="slider" id="pianogain_exec">
+            </div>
+            <div class="instrument">Chord Instrument:<button id='C_I' onclick= "switch_instrument(0)">Gpiano</button></div>
+            <div class="instrument">Main Instrument:<button id='M_I' onclick= "switch_instrument(1)">Gpiano</button></div>
+            <div class="rect">
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons b_button"></div>
+                <div class="buttons w_button"></div>
+                <div class="buttons w_button"></div>
+
+            </div>
+            <div class="partitura">
+                <canvas id="mycanvas", width=30, height=60>  
+                </canvas>
+                <div id="exec_bar_container"></div>
+                </div>
+            </div>
+            
+
+
+        </body>
+    </div>
+</div>
+
+<div class = "section" id = "statistic">
+        <button onclick = "render_score();changeSection(4);">SCORE</button>
+        <div id ="title"></div>
+        <table id ="tab">
+            <tr>
+                <th>Right Notes</th>
+                <th>Wrong Notes</th>
+                <th>Chord Notes</th>
+                <th>Total Notes</th>
+                <th>RTR</th>
+                <th>Final Score</th>    
+            </tr>
+            <tr>
+                <td class='tb' class='right_note'></td>
+                <td class='tb' class='wrong_note'></td>
+                <td class='tb' class='chord_note'></td>
+                <td class='tb' class='tot_note'></td>
+                <td class='tb' class='rtr'></td>
+                <td class='tb' class='final_score'></td>
+            </tr>
+        </table>     
+</div>
+
+<div class = "section" id = "final">
+    
+    <button onclick = "changeSection(0);get_db(); reset()">REPLAY</button>
+    <div id ="title"></div>
+    <div id = "high_score"></div>
+    
+    
+</div>
+
+
+<script src = "JAZZ_LONG.js"></script>
