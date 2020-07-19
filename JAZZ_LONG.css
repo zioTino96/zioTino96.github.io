@@ -5,7 +5,22 @@
     height: 100vh;
 }
 
-/*HOME PAGE*/
+/*############################################################################################################################
+######################################################  HOME PAGE   ##########################################################
+##############################################################################################################################*/
+#intro{
+    background-image: url("Images/jazz - Copia.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,60%);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
 .player{ /*Players from the DB*/
     width: 95%;
     height: 3vh;
@@ -48,7 +63,7 @@
 }
 
 #title1{/*Image of the title*/
-    background-image: url("title.png");
+    background-image: url("Images/title.png");
     position : fixed;
     left : 78vw;
     bottom: 0vh;
@@ -88,8 +103,711 @@
     display: none;
 }
 
+/*########## SLIDER GENERAL ############*/
+.slider {
+    -webkit-appearance: none;
+    width: 136.6px;
+    height: 3.175px;
+    border-radius: 5px;
+    background: black;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 27.32px;
+    height: 12.7px;
+    background-image: url("Images/fader.png");
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+  }
+
+#drumgain_comp, #chordgain_comp,#pianogain_comp{
+    display: inline-block;
+    position: relative;
+}
+#demo1{
+    font-size: 3vh;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 10vw; 
+}
+#demo2{
+    font-size: 3vh;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 5vw; 
+}
+#demo3{
+    font-size: 3vh;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 6vw; 
+}
+
+/*###############################################################################################################################
+######################################################  DRUM MACHINE   ##########################################################
+#################################################################################################################################*/
+
+.column {
+  background-color: none;
+  display : inline-block;
+  position : fixed;
+  top : 1vh;
+}
+#col1{
+  width : 6vw;
+}
+#col2{
+  width : 3vw;
+  left : 8vw;
+}
+#col3{
+ width : 10vw;
+  left : 11vw;
+}
+#col4{
+  width : 7vw;
+  left : 21vw;
+}
+#row{
+  position : fixed;
+  top : 20vh;
+  width : 12vw;
+  height: 4vh;
+  background-color : darkgrey;
+  border-radius: 3px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+  font-size: 2.5vh;
+  text-align: center;
+ }
+.sel{    cursor : pointer;
+   display : block;
+}
+.sel1{
+  height : 8vh;
+  width : 6vw;
+  font-size: 2vh;
+}
+.sel2{
+  height : 5.33vh;
+  width : 3vw;
+  font-size: 2vh;
+}
+.sel3{
+  height : 2.66vh;
+  width : 10vw;
+  font-size: 2vh;
+}
+.sel4{
+  height : 16vh;
+  width : 7vw;
+ font-size: 3vh;
+}
+#tempo_selector{
+  height : 3.5vh;
+  width : 3vw;
+  border-radius: 1px;
+}
+#selection{
+  position : relative;
+  left : 2vw;
+  top : 3vh;
+}
+#DrumMachine{
+  background-color : lightgrey;
+  width: 45vw;
+  height: 24vw;
+  position: fixed;
+  border-radius: 5px;
+  top: 30vh;
+  left: 27vw;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+}
+#RoundVisualizer{
+  position : fixed;
+  height:27vh;
+  width:13vw;
+  top: 1vh;
+  left: 50vw;
+  border-radius: 50%;
+  background-color: grey;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+}
+#StrokeSelector{
+ position : relative;
+  top : 27vh;
+  left : 2vw;
+}
+.stroke{
+  height : 2.55vh;
+  width : 1.25vw;
+  background-color : white;
+  display : inline-block;
+  margin : 1px;
+  border-radius : 10%;
+}
+.selected_stroke{
+  background-color : green;
+}
+ .played_stroke{
+  border : solid grey;
+  border-width: 4px;
+}
+.dm_element{
+   vertical-align: top;
+  height : 3vh;
+  width : 3.5vw;
+  display : inline-block;
+  margin : 1px;
+  border-radius : 10%;
+}
+
+/*##################################################################################################################################
+######################################################  HARMONY SECTION   ##########################################################
+####################################################################################################################################*/
+
+#Composition_section{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+}
+
+/*RIGHT SECTION*/
+#chords_selector{
+    width: 45vw;
+    height: 24vw;
+    background: lightgrey;
+    border-radius: 5px;
+    position: fixed;
+    top: 30vh;
+    left: 73vw;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+}
+
+
+.Selector_title{
+    position: absolute;
+    width: 30vw;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 5vh;
+}
+
+#settima_button{
+    position: absolute;
+    left: 5vw;
+    top: 23vh;
+    transform: translate(-50%, -50%);
+}
+#nona_button{
+    position: absolute;
+    left: 5vw;
+    top: 31vh;
+    transform: translate(-50%, -50%);
+}
+
+#empty_button{
+    position: absolute;
+    left: 5vw;
+    top: 39vh;
+    transform: translate(-50%, -50%);
+}
+
+.chord {
+    width: 27%;
+    height: 50%;
+    background: rgba(235, 233, 233, 0.705);
+    border-radius: 5px;
+    margin: 5px;
+    border: 1px solid black;
+    display: inline-block; 
+    text-align: center;  
+    font-size: 2vh;
+}
+.major_chords{
+    width: 50%;
+    height: 10%;
+    position: fixed;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.minor_chords{
+    width: 50%;
+    height: 10%;
+    position: fixed;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+}
+.dim_chord{
+    width: 35%;
+    height: 5%;
+    position: fixed;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+}
+
+.tonal_chord{
+    background-color: rgb(37, 92, 110);
+}
+/*KEY SELECTION KEYBOARD*/
+#Tonalità{
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 20%;
+    background: linear-gradient(to bottom right,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/187/vwood.png);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+
+}
+.piano_button{
+    width: 10%;
+    position: relative;
+    transform: translate( 100%, -50%);
+    border-radius:5px;
+
+   
+} 
+.white_button{
+    background: white;
+    height: 60%;
+    top: 50%;
+    display: inline-block;
+    z-index: 1;
+    box-shadow: -1px 0 0 rgba(255,255,255,0.8) inset, 0 0 5px #ccc inset, 0 0 3px rgba(0,0,0,0.2);
+}
+  
+.black_button{
+    background: black;
+    top: 18.5%;
+    display: inline-block;
+    height: 40%;
+    margin-left: -6%;
+    margin-right: -6%;
+    z-index: 2;
+    box-shadow: -1px -1px 2px rgba(255,255,255,0.2) inset, 0 -5px 2px 3px rgba(0,0,0,0.6) inset, 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.selected_key{
+    background-color:  rgb(82, 76, 76);
+}
+
+/*PRESET AREA*/
+#preset_list{
+    width: 20%;
+    height: 15%;
+    position: absolute;
+    left: 90%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    
+  }
+.preset_el{
+    position: relative;
+    transform: translate(-15%, -20%);
+    width: 100%;
+    height: 50%;
+    background: rgba(235, 233, 233, 0.705);
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid black;
+    text-align: center;  
+}
+.selected_preset{
+    background-color: #8cc0e6;
+}
+
+
+/*BOTTOM SECTION*/
+  #chords_sequence{
+    width: 95vw;
+    height: 40vh;
+    background: lightgrey;
+    border-radius: 5px;
+    position: fixed;
+    left: 50vw;
+    top: 77.5vh;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+}
+#add_bar_button{
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    transform: translate(-50%, -50%);
+}
+
+#remove_bar_button{
+    position: absolute;
+    left: 5%;
+    top: 15%;
+    transform: translate(-50%, -50%);
+}
+
+#bar_container{
+    width: 95%;
+    height: 70%;   
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+}
+
+.bar{
+    width: 24%;
+    height: 12%;
+    margin-bottom: 6px;
+    margin-right: 4px;
+    display: inline-block;
+}
+
+.beat{
+    height: 100%;
+    border: 1px solid black;
+    background:  rgb(55, 248, 16);
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+    font-size: 1.8vh;   
+}
+
+.beat_selected{
+    background-color: rgb(255, 153, 153);
+}
+
+.current_beat{
+    background-color: rgb(255, 1, 1);
+}
+
+/*############################################################################################################################
+######################################################  PLAY PAGE   ##########################################################
+##############################################################################################################################*/
+* {
+    box-sizing:border-box
+  }
+
+body {
+    background:	linear-gradient(to bottom right, #918c8c,rgb(34, 33, 33));
+    margin:0;
+    padding:0;
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+#Execution_Section{
+    width: 100vw;
+    
+    
+}
+
+/*wooden keyboard base*/
+.rect {
+    height: 288px;
+    background: linear-gradient(to bottom right,rgba(0,0,0,0.3),rgba(0,0,0,0)),url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/187/vwood.png);
+    width: 1680px;
+    padding: 3em 0 0 3em;
+    position: relative;
+    border: 1px solid #160801;
+    border-radius: 1em;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5) inset, 0 1px rgba(212,152,125,0.2) inset, 0 5px 15px rgba(0,0,0,0.5);
+    left:0.7%;
+}
+
+/*white buttons*/
+.w_button {
+    width: 40px;
+    height: 242px;
+    z-index: 1;
+    border-left: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: -1px 0 0 rgba(255,255,255,0.8) inset, 0 0 5px #ccc inset, 0 0 3px rgba(0,0,0,0.2);
+    background: linear-gradient(to bottom,#eee 0%,#fff 100%);
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    list-style: none;
+    position: relative;
+
+}
+
+/*black buttons*/
+.b_button {
+    width: 30px;
+    height: 150px;
+    margin: 0 0 0 -1em;
+    z-index: 2;
+    border: 1px solid #000;
+    border-radius: 0 0 3px 3px;
+    box-shadow: -1px -1px 2px rgba(255,255,255,0.2) inset, 0 -5px 2px 3px rgba(0,0,0,0.6) inset, 0 2px 4px rgba(0,0,0,0.5);
+    background: linear-gradient(45deg,#222 0%,#555 100%);
+    padding: 0;
+    display: inline-block;
+    list-style: none;
+    position: absolute;
+}
+
+/*features for keys*/
+.played {
+    background: lightgreen !important;;
+    
+}
+
+.wrong{
+    background: darkred;
+}
+
+.sw {
+    width: 200px;
+    height: 50px;
+    background-color: lightblue;
+    display: inline-block;
+    margin: 10px;
+}
+
+.choosen{
+    background: lightcoral;
+}
+
+/*buttons*/
+.play{
+    vertical-align: top;
+    position: relative;
+    margin-left: 584px;
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.stop{
+    vertical-align: top;
+    position: relative;
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/*Sheet bars*/
+.partiture{
+    width: 1336px;
+    height: 110px;
+    margin: 2em auto;
+    padding: 3em 0 0 3em;
+    position: relative;
+    transform: translate(50%,0%);
+    border: 1px solid #160801;
+    border-radius: 1em;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+    background-color: lightgray;
+    bottom: 20%;
+    left:-40%;
+}
+
+#mycanvas{
+    display: block;
+    position: absolute;
+    left: 650px;
+    top: 10px;
+}
+
+#bars{
+    position: absolute;
+    top: 30px;
+    left:0;
+    right:0;
+    /*border: 1px solid black;*/
+}
+
+.key_box{
+    vertical-align: top;
+    background-color: lightgray;
+    position: fixed;
+    display: inline-block;
+    margin-left: 30px;
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;  
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+}
+.mode_box{
+    vertical-align: top;
+    background-color: lightgray;
+    position: fixed;
+    display: inline-block;
+    margin-left: 160px;
+    width: 300px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;  
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+}
+
+/*choose instrument buttons*/
+.instrument{
+    font-size: 19.05px;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    display: inline-block;
+    width: 204.9px; 
+    left:-273.2px;
+
+}
+
+#C_I{
+   
+    text-align:center;
+    position: relative;
+    width: 136.6px;
+    height: 31.75x;
+    font-size: 19.05px;
+    font-family: 'Times New Roman', Times, serif;
+    left:0px;
+}
+
+#M_I{
+    
+    text-align:center;
+    position: relative;
+    width: 136.6px;
+    height: 31.75x;
+    font-size: 19.05px;
+    font-family: 'Times New Roman', Times, serif;
+    left:0px;
+}
+
+/*execution sliders*/
+#slider_exec{
+    width: 136.6px;
+    height: 127px;
+    position: relative;
+    display: inline-block;
+    left: -409.8px;
+}
+
+#drumgain_exec, #chordgain_exec,#pianogain_exec{
+    display: block;
+    position: relative;
+    margin:5px;
+    margin: 10px;
+}
+
+.demo{
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    width: 136.6px
+}
+
+/*sliding bars*/
+#exec_bar_container{
+    width: 100%;
+    height: 70%;   
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+}
+.exec_bar{
+    width: 25%;
+    height: 40%;
+    position: absolute;
+    margin-bottom: 6px;
+    margin-right: 4px;
+    right: 0%;
+    display: inline-block;
+    opacity:0;
+}
+.exec_beat{
+    height: 100%;
+    text-align: center;
+    border: 1px solid black;
+    background:  rgb(55, 248, 16);
+    display: inline-block;
+    font-size: small;
+}
+
+/*############################################################################################################################
+######################################################  SCORE PAGES   ########################################################
+##############################################################################################################################*/
+
+#statistic{
+    background-image: url("Images/jazz - Copia.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,60%);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
+#final{
+    background-image: url("Images/jazz - Copia.png");
+    position : absolute;
+    left : 50%;
+    bottom: 60%;
+    transform: translate(-50%,60%);
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-size: cover;
+    background-position: center; /* Center the image */
+}
+
+/*table score*/
+table {
+    border-collapse: collapse;
+    width: 900px;
+    position: absolute;
+    transform: translate(-50%,25%);
+    left : 50%;
+    bottom: 50%;
+    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
+    border-radius: 5px;
+}
+th, td {
+    text-align: center;
+    padding: 8px;
+    font-family: 'Times New Roman', Times, serif;
+   
+}
+
+th {
+    background-color: #ffca18;
+    color: black;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
 #title{
-    background-image: url("final_score_1.png");
+    background-image: url("Images/final_score_1.png");
     position : absolute;
     left : 50%;
     bottom: 60%;
@@ -103,11 +821,8 @@
 }
 
 #image{
-    background-image: url("jazz\ -\ Copia.png");
+    background-image: url("Images/jazz - Copia.png");
     position : absolute;
-    /*left : 50%;
-    bottom: 60%;
-    transform: translate(-50%,0%);*/
     width: 100%;
     height: 100%;
     display: block;
@@ -179,145 +894,3 @@
     width: 900px;
 }
 
-/*partitura scorrevole*/
-#exec_bar_container{
-    width: 100%;
-    height: 70%;   
-    position: absolute;
-    left: 50%;
-    top: 90%;
-    transform: translate(-50%, -50%);
-}
-.exec_bar{
-    width: 25%;
-    height: 40%;
-    position: absolute;
-    margin-bottom: 6px;
-    margin-right: 4px;
-    right: 0%;
-    /*border: 1px solid red;*/
-    display: inline-block;
-    opacity:0;
-}
-.exec_beat{
-    height: 100%;
-    text-align: center;
-    border: 1px solid black;
-    background:  rgb(55, 248, 16);
-    display: inline-block;
-    font-size: small;
-}
-
-#intro{
-    background-image: url("jazz\ -\ Copia.png");
-    position : absolute;
-    left : 50%;
-    bottom: 60%;
-    transform: translate(-50%,60%);
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    background-size: cover;
-    background-position: center; /* Center the image */
-}
-#statistic{
-    background-image: url("jazz\ -\ Copia.png");
-    position : absolute;
-    left : 50%;
-    bottom: 60%;
-    transform: translate(-50%,60%);
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    background-size: cover;
-    background-position: center; /* Center the image */
-}
-
-#final{
-    background-image: url("jazz\ -\ Copia.png");
-    position : absolute;
-    left : 50%;
-    bottom: 60%;
-    transform: translate(-50%,60%);
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    background-size: cover;
-    background-position: center; /* Center the image */
-}
-
-/*table score*/
-table {
-    border-collapse: collapse;
-    width: 900px;
-    position: absolute;
-    transform: translate(-50%,25%);
-    left : 50%;
-    bottom: 50%;
-    box-shadow: 0 0 50px rgba(44, 38, 38, 0.5) inset, 0 1px rgba(90, 82, 82, 0.2) inset, 0 5px 15px rgba(39, 37, 37, 0.5);
-    border-radius: 5px;
-}
-th, td {
-    text-align: center;
-    padding: 8px;
-    font-family: 'Times New Roman', Times, serif;
-   
-}
-
-th {
-    background-color: #ffca18;
-    color: black;
-}
-
-tr:nth-child(even){background-color: #f2f2f2}
-
-/*slider general*/
-
-.slider {
-    -webkit-appearance: none;
-    width: 136.6px;
-    height: 3.175px;
-    border-radius: 5px;
-    background: black;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 27.32px;
-    height: 12.7px;
-    background-image: url("fader.png");
-    cursor: pointer;
-    background-size: cover;
-    background-position: center;
-  }
-
-#drumgain_comp, #chordgain_comp,#pianogain_comp{
-    display: inline-block;
-    position: relative;
-}
-#demo1{
-    font-size: 3vh;
-    font-family: 'Times New Roman', Times, serif;
-    position: relative;
-    display: inline-block;
-    width: 10vw; 
-}
-#demo2{
-    font-size: 3vh;
-    font-family: 'Times New Roman', Times, serif;
-    position: relative;
-    display: inline-block;
-    width: 5vw; 
-}
-#demo3{
-    font-size: 3vh;
-    font-family: 'Times New Roman', Times, serif;
-    position: relative;
-    display: inline-block;
-    width: 6vw; 
-}

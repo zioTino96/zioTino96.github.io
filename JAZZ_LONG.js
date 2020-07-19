@@ -45,8 +45,10 @@ function onMIDIFailure() {//called when the access to the MIDI device fails
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////CONSTANTS//////////////////////////////////////////
-//Audio
+//Path
 const path = window.location.href.replace("JAZZ_LONG.html","")
+
+//Audio Drum Machine
 const crash = new Audio(path + 'Drums_sounds/cx.wav');
 const snare = new Audio(path + 'Drums_sounds/snare.wav');
 const hihat = new Audio(path + 'Drums_sounds/HHC.wav');
@@ -58,7 +60,7 @@ const samples = [crash,snare,hihat,hopen,kick,ride];
 
 audioCtx = new AudioContext;
 
-const offset = 36;
+const offset = 36;//First note of the keyboard is MIDI note 36
 
 //Various strings
 const modes = ['Ionian', '-', 'Dorian', '-', 'Phrygian', 'Lydian', '-',  'Mixolydian', '-',  'Aeolian', '-',  'Locrian'];
@@ -92,7 +94,7 @@ var drum = {N_beats:16,metric_subdivision:4,tempo_bpm:120,go:false,prescaler:0,t
 var chord_sequence_matrix= [];
 for (i=0; i<24; i++){chord_sequence_matrix[i]= new Array(metric).fill(null)} //Creates a matrixwith a maximum of 24 bars
 var chord = {KEY:0,PRESET:0,MATRIX:chord_sequence_matrix,SETTIMA:false,NONA:false,N_BAR:0,selected_beat_index:null};
-var this_bar = 0;
+var this_bar = -1;
 var this_sub_beat = 0;
 var this_beat = 0;
 var chord_playout = {note:[], note1:null, note2:null, note3:null, note4:null, note5:null};
@@ -120,8 +122,8 @@ ctx_B = canvas.getContext("2d")
 var all_sections = document.querySelectorAll(".section");
 var all_keys = document.querySelectorAll(".piano_button");
 var all_chords = document.querySelectorAll(".chord");
-var all_beats = document.querySelectorAll(".beat"); //array che contiene tutti i beat di tutte le battute create
-var all_presets = document.querySelectorAll(".preset_el"); //array dei tastini preset
+var all_beats = document.querySelectorAll(".beat");
+var all_presets = document.querySelectorAll(".preset_el");
 var all_buttons = document.querySelectorAll(".buttons");
 var all_exec_beats = document.querySelectorAll(".exec_beat");
 var all_exec_bar = document.querySelectorAll(".exec_bar");
@@ -134,12 +136,17 @@ generate_stroke_selector();
 //////////////////////////////////////////TIMER MANAGEMENT//////////////////////////////////////////
 next_frame();
 function next_sub_beat(){//timer that goes with the rate of sixteenth
-      for (i=0; i<N_drums; i++){
+      for (i=0; i<N_drums; i++){//play drums
         if(drum.this_preset[i][this_sub_beat]){
           play_drum(i);
         }
       }
-      if (this_sub_beat%drum.metric_subdivision == 0) {
+      if (this_sub_beat == 0){//update this_bar
+        if (section==2){played_bar++}
+        if (this_bar == chord.N_BAR-1){ this_bar = 0;}
+        else {this_bar = (this_bar + 1)%24;}
+      }
+      if (this_sub_beat%drum.metric_subdivision == 0) {//update this_beat
         this_beat = (this_sub_beat/drum.metric_subdivision)+this_bar*metric;//update current beat
         render_current_beat(this_beat);//highlight current beat
         animation.prev_beat_milliseconds = Date.now();//Sets to zero the time passed from the previous beat
@@ -151,15 +158,13 @@ function next_sub_beat(){//timer that goes with the rate of sixteenth
           render_key_mode();
         }//if there is a chord in the current beat: play chord, update current key
       }
+      if (this_sub_beat%drum.N_beats==0){//reset animation phase
+      animation.prev_bar_milliseconds = Date.now();//Sets to zero the time passed from the previous bar
+      }
       render_stroke_selector();//Movement of the highlighted little squares(DM)
-      this_sub_beat++;
+      this_sub_beat++;//update this_sub_beat
       this_sub_beat = this_sub_beat%drum.N_beats;
-      if (this_sub_beat == 0){
-        if (section==2){played_bar++}
-        if (this_bar == chord.N_BAR-1){ this_bar = 0;}
-        else {this_bar = (this_bar + 1)%24;}
-        animation.prev_bar_milliseconds = Date.now();//Sets to zero the time passed from the previous bar
-      }    
+          
 }
 function reset_timer(){
   clearInterval(drum.timer);//resets the timer (it is called if there are changes on: bpm, shuffle/straight)
@@ -194,7 +199,7 @@ function resync(){//resyncronizes timer animation on start reproduction (DM_play
 }
 
 //////////////////////////////////////////DATABASE INTERACTION//////////////////////////////////////////
-function get_db(){
+function get_db(){//download presets and score
   db.collection('preset_DM').doc('preset_DM').get().then(//Download of drum machine's presets
     function (doc){
         preset = JSON.parse(doc.data().data);
@@ -225,9 +230,13 @@ function changeSection(nextSection){//Function to change the displayed section
     if (drum.go){DM_stop();stop_bouncing();}
 
 }
+
+//////////////////////////////////////////Audio Context//////////////////////////////////////////
 function resume(){//Unlocks AudioContext
   audioCtx.resume();
 }
+
+//////////////////////////////////////////Intro//////////////////////////////////////////
 name_input.onkeypress = function insert_name(event){//Input of new player "object"
   if (event.keyCode == 13){
       myName = name_input.value;
@@ -266,6 +275,8 @@ function difficulty_selection(){
   else {difficulty_level++;}
   level_button.innerHTML = difficulty_level_array[difficulty_level];
 }
+
+//////////////////////////////////////////Slider Sync//////////////////////////////////////////
 function update_slider(){//set the value of the gain accordingly to the slider
   if (section==1){
     drumgain_comp.onchange = function(){drumGain = drumgain_comp.value/100;render_slider();};
@@ -352,13 +363,11 @@ function chord_clicked(event, index){
     chord.MATRIX[Math.floor(chord.selected_beat_index/metric)][chord.selected_beat_index%metric]=myObject; //Assign the chord to the relative beat slot in the matrix
     render_beats();
 }
-all_chords.forEach(chord_selection); //mette tutti i chord in attesa del click(posso farlo una sola volta tanto gli slot sono sempre quelli, non vengono cancellati)
+all_chords.forEach(chord_selection);
 empty_button.onclick = function(event) {
     if(chord.selected_beat_index != null){chord.MATRIX[Math.floor(chord.selected_beat_index/metric)][chord.selected_beat_index%metric]= null}
     render_beats();
 }
-
-//SELEZIONE preset
 function preset_selection(preset, index){
   preset.onclick = function(event) {DM_stop(); preset_clicked(event, index)}
 }  
@@ -367,10 +376,7 @@ function preset_clicked(event, index){ //Acts on preset click
     chord.PRESET = index+1; //Sets the variable to build the right preset (0 means no preset)
     preset_creation(); //Calls the function that builds the preset
 }
-
-
 all_presets.forEach(preset_selection) 
-
 function preset_creation(){ //Builds the presets inside the matrix and calls the render for the chord sequence section
     while (chord.N_BAR>0){ //Removes all he existing bars
       remove_bar();
@@ -526,17 +532,19 @@ function DM_play(){//Buttons "start" both in composition and execution
   play_button.onclick = DM_stop;
   this_sub_beat = 0;
   this_beat = 0;
-  this_bar = 0;
+  this_bar = -1;
   drum.alpha = 0;
   drum.go = true;
-  resync();
+  resync(); 
+  reset_timer();
+  next_sub_beat();
 }
 function DM_stop(){//Buttons "stop" both in composition and execution
   play_button.innerHTML = 'PLAY';
   play_button.onclick = DM_play;
   this_sub_beat = 0;//reset all counters
   this_beat = 0;
-  this_bar = 0;
+  this_bar = -1;
   drum.go = false;
   render_current_beat (this_beat);
   box_key.innerHTML = '-';//key suggestion in execution 
@@ -548,6 +556,8 @@ tempo_selector.onchange = function(event){//input tempo
   drum.tempo_bpm = parseInt(event.target.value);//Read inserted value
   if (drum.go == true){DM_stop()}//stop DM if it is running
   reset_timer();
+  //Easter egg triggering
+  if (event.target.value == "NyanCat"){easter_egg();}
 }
 
 //////////////////////////////////////////EXECUTION//////////////////////////////////////////
@@ -625,7 +635,6 @@ else{
 }
   return new_chord;
 }
-
 //Bouncing ball
 function play_bouncing(){
   ball.control=0;
@@ -634,7 +643,6 @@ function play_bouncing(){
 function stop_bouncing(){
   ball.control=1;
 }
-
 //Get notes played by user and do the various verifications 
 function getMIDIMessage(message) { //Receive data from the MIDI message assigning values to variables
     exec.command = message.data[0];
@@ -702,6 +710,7 @@ function selected_scale(scale){//Assign true values to the keys of the "right" s
   }
 }
 
+//////////////////////////////////////////FINAL PAGE//////////////////////////////////////////
 //Last page can refresh it all if finished
 function reset (){
   location.reload();
@@ -736,6 +745,8 @@ function renderSection(){//Changes showed window
       final.style.display = "inline";    
   }
 }
+
+//////////////////////////////////////////Intro//////////////////////////////////////////
 function render_players(){//Shows the names of the pre-existing players on the intro section
   document.querySelectorAll('.player').forEach(function(obj){obj.remove()});
   players.forEach(function(name,index){
@@ -954,8 +965,8 @@ function render_statistics(){//Prints the statistics on screen
   row=document.querySelectorAll('.tb');
   for(i=0; i<stat.length; i++){
     row[i].innerHTML=String(statistics[stat[i]]);
-    }
   }
+}
 function render_score(){
   db.collection('Score').doc('Player').get().then(//Download the scores
     function (doc){
@@ -989,11 +1000,32 @@ function render_score(){
   )  
 }
 
+//////////////////////////////////////////Easter Egg//////////////////////////////////////////
+// We've been dying on thousands of bugs. Let us fool around a little bit ;)
+function easter_egg(){
+    Nyan_Ascii = 
+    '░░▓▓░░░░░░░░▓▓░░' + '\n' +
+    '░▓▒▒▓░░░░░░▓▒▒▓░' + '\n' +
+    '░▓▒▒▒▓░░░░▓▒▒▒▓░' + '\n' +
+    '░▓▒▒▒▒▓▓▓▓▒▒▒▒▓░' + '\n' +
+    '░▓▒▒▒▒▒▒▒▒▒▒▒▒▒▓' + '\n' +
+    '▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓' + '\n' +
+    '▓▒▒▒░▓▒▒▒▒▒░▓▒▒▓' + '\n' +
+    '▓▒▒▒▓▓▒▒▒▓▒▓▓▒▒▓' + '\n' +
+    '▓▒░░▒▒▒▒▒▒▒▒▒░░▓' + '\n' +
+    '▓▒░░▒▓▒▒▓▒▒▓▒░░▓' + '\n' +
+    '░▓▒▒▒▓▓▓▓▓▓▓▒▒▓░' + '\n' +
+    '░░▓▒▒▒▒▒▒▒▒▒▒▓░░' + '\n' +
+    '░░░▓▓▓▓▓▓▓▓▓▓░░░' + '\n' +
+    'Hope you enjoyed Jazz Long. GL CM MS EV creators';
+    alert(Nyan_Ascii);
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////// SOUND ///////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-function play_chord (obj){
+function play_chord (obj){//play a chord
   stop_previous_chord();
   chord_created = create_chord(obj.semitones, obj.tonalita, obj.seventh, obj.ninth);
   for (i=0; i<chord_created.length; i++) {
@@ -1002,23 +1034,20 @@ function play_chord (obj){
     chord_handlers[i] = chord_created[i];
   }
 }
-
-function play_midi(index){
+function play_midi(index){//output sound from MIDI keyboard
   exec.actual_note = new Audio(path + instrument_path[instrument_main]+ index +'.wav');
   exec.actual_note.loop = false;
   keys_handlers[index] = exec.actual_note;
   exec.actual_note.volume = pianoGain;
   exec.actual_note.play();
 }
-
-function play_drum(index){
+function play_drum(index){//play the drums
     mySound = samples[index].cloneNode();
     mySound.onended = function(){mySound.remove()};
     mySound.volume = drumGain;
     mySound.play();
 }
-
-function stop_previous_chord(){
+function stop_previous_chord(){//interrupt the sound from previous chords
   chord_handlers.forEach(function(obj,idx){
     if (obj != null){
       chord_handlers[idx].pause();

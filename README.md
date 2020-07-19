@@ -38,36 +38,37 @@ You can set it by selecting the desired metric for your backing track (3/4, 4/4,
 <img align="right" src="Readme_images/Chord_sequence.PNG"  width="50%" height="50%" style="margin-left:10px;">
 At the bottom of the page lies your complete partiture. Press "add bar" or "remove bar" to adjust its the length. 
 
-<img align="left" src="Readme_images/Chord_selector.PNG"  width="50%" height="50%" style="margin-top:10px;">
+<img align="left" src="Readme_images/Chord_selector.PNG"  width="50%" height="50%" style="margin-top:20px;">
 </br>
-
+</br>
 Click on a single beat to assign it a chord, that you can find in the chord selector on your right. 
 Use the piano keys to select a reference key and the compatible chords will appear just below. Alternatively, click on a preset, they are made out of the most popular chord progressions in Jazz.
 
+</br></br>
+
 </br>
-
-
 
 ### Tickle those ivories
-
 <img align ="right" src="Readme_images/keyboard.PNG"  width="40%" height="40%" style="margin-left:10px; margin-bottom:10px;">
-</br>
-When you're done composing, it's time to play! Click "NEXT" to be redirected to the following section and you can improvise on your MIDI keyboard while the track is being played. 
 
-</br>
+When you're done composing, it's time to play! Click "NEXT" to be redirected to the following section and you can improvise on your MIDI keyboard while the track is being played.
 
+**(Remember to choose the zoom that better fits your type of screen!)**
+
+</br></br>
 <img align="left" src="Readme_images/Instrument_selection.PNG" width="40%" height="40%" style="margin-right:10px ;margin-top:10px;">
 Choose your instrument between grand piano, Hammond organ and acoustic guitar.
 
-</br></br></br></br>
-
-<img align="right" src="Readme_images/Sliders.PNG" width="30%" height="15%" style="margin-left:10px;">
-</br></br>
-You can set the volume sliders, if you're not happy with the mix. 
-
-</br></br></br></br>
-The app will automatically detect the right notes and the errors, according to the major scale harmony theory, and your performance will be given a score.
 </br>
+<img align="right" src="Readme_images/Sliders.PNG" width="21%" height="11%" style="margin-left:30px;">
+</br></br>
+You can set the volume sliders choosing the best mix for the backing track and your improvisation.
+
+</br></br></br></br>
+<img align="right" src="Readme_images/Play_Stop_key_mode.PNG" width="30%" height="30%" style="margin-top:10px;">
+The app will automatically detect the right notes and the errors, according to the major scale harmony theory, and your performance will be given a score.
+</br></br>
+
 
 <img align="left" src="Readme_images/Statistics.PNG" width="40%"  style="margin-left:10px; margin-bottom:10px;">
 </br>
@@ -84,19 +85,23 @@ When you press "END" it will show all the statistics recorded about your current
 </br>
 Your name and your score have been saved on our database. 
 From now on just click on your name whenever you want to start Jazz Long.
-</br></br></br>
+</br></br>
+</br></br>
 
 Your score will be automatically updated at the end of every session by adding it to your score on the database. Practice makes perfect, compete with all the other players and reach the top of the final score!
 
-<img src="Readme_images/Final_score.PNG"  width="50%" style="margin-left:200px;">
-</br>
-</br>
+<p align="center">
+<img src="Readme_images/Final_score.PNG" width="50%" style="margin-left:200px;">
+ </p>
 </br>
 
-<img align="right" src="Readme_images/Play_Stop_key_mode.PNG" width="20%" height="20%" style="margin-left:10px;">
-<img align="left" src="Readme_images/sliding_bars.PNG" width="20%" height="20%" style="margin-left:10px;">
 
+## Where is Jazz Long
+For the best experience we strongly recommend downloading the app. However, Jazz Long is hosted online at the following link: https://zioTino96.github.io 
 
+Here you can find the video presentation of our work: https://youtu.be/2y9JGPbGHlw
+
+Wanna know more about the structure of the code? Take a glance at the file CodeMap.pdf
 
 ## Who is Jazz Long
 JL (Jack Long)
@@ -105,10 +110,3 @@ O (Orland)
 C (Ceci)
 
 ## Have Fun!
-
-
-
-
-
-
-
